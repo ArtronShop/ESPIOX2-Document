@@ -1,0 +1,48 @@
+
+body {
+	font-size: 16px;
+}
+
+.br-top {
+	border: 0;
+	border-top: solid 3px #0C84E4;
+}
+
+.block-top {
+	background: #F4F4F4;
+}
+
+.logo {
+	font-size: 42px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #999;
+}
+
+.top-h {
+	padding: 20px 0;
+}
+
+.block-section {
+	padding: 20px;
+	background: #0C84E4;
+	text-align: center;
+}
+
+.block-section > div {
+	font-family: 'supermarket', Arial, Helvetica, sans-serif;
+	font-size: 36px;
+	color: #FFF;
+	text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.18);
+	margin: 0;
+}
+
+@font-face {
+	font-family: 'supermarket';
+	src: url('../fonts/supermarket.eot?#iefix') format('embedded-opentype'),  
+		  url('../fonts/supermarket.woff') format('woff'), 
+		  url('../fonts/supermarket.ttf')  format('truetype'), 
+		  url('../fonts/supermarket.svg#supermarket') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
