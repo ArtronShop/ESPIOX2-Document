@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>การใช้งาน ESP8266 ควบคุม LED ผ่าน MQTT โดยใช้ Arduino IDE (C++)s - ESPIOX2 Document</title>
+<meta name=viewport content="width=device-width,initial-scale=1" />
+<meta name="description" content="สอนการใช้งาน MQTT แบบละเอียดกับ ESP8266 ควบคุมหลอด LED ผ่านหน้าเว็บแบบเรียวทาม" />
+<meta name="keywords" content="mqtt,espiox2,nodemcu,esp8266,wemos,arduino,การใช้ mqtt" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/jquery-1.12.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body>
+<div class="br-top"></div>
+
+<div class="block-top">
+  <section class="container top-h">
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="logo">ESPIOX2 Document</div>
+      </div>
+      <div class="col-sm-5" style="padding-top: 15px;">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="ป้อนคำที่ต้องการ">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">ค้นหา</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="box-breadcrumb">
+  <section class="container">
+    <ol class="breadcrumb">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="category-arduino.html">Arduino IDE</a></li>
+      <li class="active">การใช้งาน ESP8266 ควบคุม LED ผ่าน MQTT โดยใช้ Arduino IDE (C++)</li>
+    </ol>
+  </section>
+</div>
+
+<section class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="page-header">
+        <h1>การใช้งาน ESP8266 ควบคุม LED ผ่าน MQTT โดยใช้ Arduino IDE (C++)</h1>
+      </div>
+      
+      <div class="article-detail">แก้ไขล่าสุดเมื่อ : 28/4/2559 โดย ร้าน IOXhop</div>
+      
+      <article>
+        <p>ในบทความนี้เราจะมาใช้ MQTT ในเป็นโปรโตคอลตัวกลางในการสื่อสารระหว่างคอมพิวเตอร์ หรืออุปกรณ์ต่างๆ ผ่านอินเตอร์เน็ต ไปที่ ESP8266 กันครับ หลังจากอ่านบทความนี้จบแล้ว ท่านสามารถจะนำ MQTT ไปใช้งานอื่นๆได้อีกมากมาย เช่น การสือสารกันเองระหว่าง ESP8266 กับ ESP8266 ในการแชร์ข้อมูลซึ่งกันและกัน มอนิเตอร์อุณหภูมิแบบเรียวทาม ติดตามการทำงานของเครื่องจักรแบบไร้สาย นอกจากนี้ยังสามารถนำไปประยุกต์ใช้อะไรที่ไม่เกี่ยวข้องกับ ESP8266 อย่างการทำห้องแชทออนไลน์ได้อีกด้วย</p>
+        <h2>รู้จักกับ MQTT</h2>
+        <p><strong>MQTT</strong> เป็นโปรโตคอลที่ใช้สำหรับการสื่อสาร ต่างภาษา ต่างอุปกรณ์กัน หรือภาษาเดียวกัน อุปกรณ์เดียวกัน ซึ่งมีไลบารี่ให้พร้อมสำหรับภาษาต่างๆ ได้แก่ Heroku Ruby Python NodeJS Java Go .NET NodeMCU(Lua) และ PHP ทำงานอยู่บนฐานของโปรโตคอล TCP</p>
+        <p>โดยปกติแล้ว MQTT จะสามารถใช้งานได้ก็ต่อเมื่อมีเซิฟเวอร์ตัวกลางเท่านั้น ซึ่งท่านสามารถติดตั้งบนเซิฟเวอร์ของตัวเองก็ได้ แต่ในบทความนี้จะเลือกใช้บริการเซิฟเวอร์ MQTT จากเว็บ <a href="http://www.cloudmqtt.com/" target="_blank">CloudMQTT</a> ซึ่งสามารถใช้งานได้ฟรี 10 การเชื่อมต่อ กรณีต้องการนำไปใช้งานจริงควรเผื่อจำนวนการเชื่อมต่อไว้มากๆหากนำไปใช้กับสาธาณะ</p>
+        <p>ก่อนที่จะใช้งานได้ เราจำเป็นต้องมารู้ศัพท์ที่ใช้ และหลักการใช้งานกันก่อนครับ ก่อนอื่นเลย Username Password ที่ใช้ล็อกอินเข้าใช้งานโปรโตคอลจะมีอยู่ด้วยกัน 2 ระดับ คือ ระดับหัวหน้า และระดับผู้ดูแลห้อง (เป็นชื่อระดับที่ผมตั้งขึ้นเองเพื่อให้เข้าใจได้ง่าย) ข้อแตกต่างของ 2 ระดับนี้คือ
+        <p>
+          <ul>
+            <li><strong>ระดับหัวหน้า</strong> เปรียบได้กับผู้บริหาร หรือเจ้าของบริษัท มีสิทธิ์ที่จะฟัง และประกาศ ไปยังห้อง (Topic) ไหนก็ได้ที่มีการสร้างขึ้น ซึ่ง Username Password จะถูกกำหนดมาแล้ว หลังจากสมัครสมาชิกในระบบของ CloudMQTT จะมีประกาศในหน้าแรก</li>
+            <li><strong>ระดับผู้ดูแลห้อง</strong> ระดับนี้มีสิทธิ์ที่จะฟังอย่างเดียว ประกาศอย่างเดียว หรือทั้งฟังและประกาศ ได้ในห้อง (Topic) ที่กำหนดไว้แล้วเท่านั้น ซึ่ง Username Password สามารถกำหนดได้เองโดยการสร้าง</li>
+          </ul>
+        </p>
+        <p>ต่อมา ก็มาทำความรู้จักกับคำว่า <strong>Topic</strong> กันครับ คำนี้ผมจะขอใช้ว่าเป็น "ชื่อห้อง" น่าจะเข้าใจได้ง่ายกว่า ก่อนที่เราจะส่งข้อมูล หรือรอฟังข้อมูล เราจะต้องทราบชื่อห้องซะก่อนครับ เปรียบเสมือนว่าหากเราต้องการจะคุยกับกลุ่มไหน เราจำเป็นที่จะต้องรู้ชื่อกลุ่มซะก่อน ในทาง MQTT จะเรียกชื่อห้องว่า <strong>Topic</strong> ซึ่งสามารถกำหนดเป็นอะไรก็ได้ แต่โดยส่วนใหญ่จะกำหนดในลักษณะคล้าย Path เช่น /ESP/LED /ESP/TEMP และอื่นๆ การตั้ง ควรเป็นชื่อที่สื่อความหมาย และเข้าใจได้ง่ายด้วยครับ</p>
+        <p><strong>พอร์ต (Port)</strong> ใน CloudMQTT จะแบ่งพอร์ตออกเป็น 3 ชนิด ดังนี้</p>
+        <p>
+          <ul>
+            <li><strong>Port</strong> เป็นพอร์ตที่โปรโตคอล MQTT ใช้งาน ใช้งานกับภาษาที่อยู่ในฝั่ง Back-end เช่น PHP C++ และภาษาอื่นๆที่ได้กล่าวไปแล้ว (พอร์ตที่จะให้ ESP8266 คือพอร์ตชนิดนี้)</li>
+            <li><strong>SSL Port</strong>  เป็นพอร์ตที่โปรโตคอล MQTT ใช้งาน แต่จะถูกใช้เมื่อต้องการเชื่อมต่อแบบ SSL ซึ่งผมแนะนำให้ใช้พอร์ตนี้หากอุปกรณ์รองรับ SSL (ESP8266 ไม่ค่อยจะรองรับ จึงไม่ได้ใช้)</li>
+            <li><strong>Websockets Port (TLS only)</strong> เป็นพอร์ตที่ใช้กับหน้าเว็บ ซึ่งหน้าเว็บนั้นไม่รองรับโปรโตคอล MQTT หรือเชื่อมต่อ TCP โดยตรง แต่มีเทคโนโลยีเรียวทามที่ออกแบบมาสำหรับเว็บอยู่แล้ว ชื่อ WebSocket ในการที่จะส่งข้อมูลผ่านหน้าเว็บจะต้องคอนฟิกพอร์ตเป็นพอร์ตชนิดนี้</li>
+          </ul>
+        </p>
+        <p><strong>Connection limit</strong> เป็นการจำกัดจำนวนผู้เข้ามาเชื่อมต่อ (Clients) ในวินาทีนั้นๆ ตัวอย่างเช่น เปิดหน้าเว็บที่เชื่อมต่ออยู่ไว้ 2 หน้า และมี ESP8266 ที่เชื่อมต่ออีก 1 ตัว รวมแล้วจะนับเป็น 3 การเชื่อมต่อ หากใช้งานฟรีเซิฟเวอร์ MQTT จาก CloudMQTT จะถูกจำกัดไว้ที่ 10 การเชื่อมต่อ</p>
+        <h2>สมัครใช้งานฟรีเซิฟเวอร์ MQTT จาก CloudMQTT</h2>
+        <p>เข้าไปที่ลิ้ง <a href="https://customer.cloudmqtt.com/login" target="_blank">https://customer.cloudmqtt.com/login</a> ตรง Sign up กรอกอีเมล์ของท่านลงไปก่อน จากนั้นไปเช็คเมล์ ระบบจะส่งลิ้งสำหรับสมัครสมาชิกไปให้ จากนั้นคลิกลิ้งที่อยู่ในเมล์ แล้วกรอกรายละเอียดต่างๆเป็นอันเสร็จครับ (ผมไม่มีรูปภาพให้ดูเป็นขั้นตอนเนื่องจากได้สมัครสมาชิกไว้แล้วครับ)</p>
+        <h2>เลือก Plan ใช้งาน และเตรียมพร้อมก่อนเขียนโค้ด</h2>
+        <p>เมื่อเข้าสู่ระบบแล้ว จะพบกับหน้าจัดการทั้งหมดประมาณรูปด้านล่างนี้ กดปุ่ม + Create</p>
+        <p><img src="http://a.lnwpic.com/6g0ahi.png" alt="" /></p>
+        <p>จากนั้นตั้งชื่อ (ชื่ออะไรก็ได้ ไม่มีผลต่อโค้ด) ในข้อที่ 1 เลือกที่ตั้งของเซิฟเวอร์ในข้อที่ 2 (มีให้เลือก US กับ EU ผมเลือก US) และสุดท้าย Plan กรณีต้องการใช้ฟรีให้คง Cute Cut ไว้ ไม่ต้องแก้ หากต้องการใช้งานแบบเสียงตังต้องเชื่อม Paypal แล้วเลือก Plan ที่ลิ้ง <a href="https://www.cloudmqtt.com/plans.html" target="_blank">https://www.cloudmqtt.com/plans.html</a> จากนั้นกดปุ่ม Create</p>
+        <p><img src="http://a.lnwpic.com/lmtaz4.png" alt="" /></p>
+        <p>จากนั้นระบบจะพากลับมาหน้าเดิม ให้กดที่ปุ่ม Details</p>
+        <p><img src="http://a.lnwpic.com/i2xqqm.png" alt="" /></p>
+        <p>จากนั้นรายละเอียดต่างๆจะแสดงขึ้นมาในหัวข้อ Instance info (สามารถอ่านรายละเอียดได้ในหัวข้อที่แล้ว)</p>
+        <p><img src="http://a.lnwpic.com/w71la4.png" alt="" /></p>
+        <p>ต่อมา เราจะมาสร้าง Username Password ระดับหัวหน้าห้องกันครับ เลื่อนมาที่หัวข้อ Manage Users แล้วตั้ง Username Password ที่ต้องการ หากทำครั้งแรกแนะนำให้ตั้งตามผมไปก่อนคือ User : TEST และ Pass : 12345 แล้วกดปุ่ม Save</p>
+        <p><img src="http://a.lnwpic.com/5vd9eb.png" alt="" /></p>
+        <p>แล้วจะมีการรีเฟสหน้าเว็บซักครู่ จากนั้นก็จะแสดงรายชื่อที่เราได้สร้างไว้ทั้งหมดออกมา</p>
+        <p><img src="http://a.lnwpic.com/xdut5i.png" alt="" /></p>
+        <p>เลื่อนลงมาที่ New Rule ตรงส่วนนี้จะเป็นส่วนที่ไว้กำหนดว่าผู้ดูแลห้อง (User) ใด สามารถฟัง (Read) หรือประกาศ (Write) ไปที่ห้อง (Topic) ใดได้บ้าง เลือก User ในข้อที่ 1 จากนั้นตั้งชื่อห้อง (Topic) ในช่องที่ 2 หากทำครั้งแรกแนะนำให้ตั้ง /ESP/LED ตามผมไปก่อน แล้วเลือกสิทธิ์ในการใช้งานห้อง (Topic) ในช่อง 3 และ 4 จากนั้นกด Save</p>
+        <p><img src="http://a.lnwpic.com/al59w9.png" alt="" /></p>
+        <p>รอซักครู่หนึ่ง จะมีการรีเฟสหน้าเว็บ จากนั้นเลื่อนลงมาดูในหัวข้อ ACLs ก็จะเห็นข้อมูลที่เราได้ตั้งไว้ครับ</p>
+        <p><img src="http://a.lnwpic.com/wlpmmg.png" alt="" /></p>
+        <p>มาจนถึงตรงนี้ก็เป็นอันจบการจัดการแล้ว ลองกดไปที่ Websocket UI</p>
+        <p><img src="http://a.lnwpic.com/evsuui.png" alt="" /></p>
+        <p>แล้วเปิดลิ้งขึ้นมา 2 หน้าคู่กัน ลองใส่ Topic เป็น /ESP/LED แล้วใส่ข้อความลงไป กดปุ่ม Send หากส่งจากหน้าหนึ่ง อีกหน้าหนึ่งจะมีการแสดงข้อมูลอัตโนมัติด้วย ซึ่งในหน้านี้จะใช้สำหรับดูว่าโค้ดที่เราได้เขียนนั้นได้มีการส่งข้อมูลมาที่เซิฟเวอร์หรือเปล่า สามารถใช้สำหรับดีบัคได้ในกรณีเกิดปัญหา</p>
+        <p><img src="http://a.lnwpic.com/xgp0q4.png" alt="" /></p>
+        <h2>เขียนโค้ดด้วย Arduino IDE</h2>
+        <p>หากยังไม่ได้ลงบอร์ดให้โปรแกรม Arduino ท่านสามารถอ่านวิธีลงบอร์ดได้ที่บทความ <a href="esp8266-on-adurino-ide.html" target="_blank">เริ่มต้นพัฒนาเฟิร์มแวร์ด้วย Arduino IDE</a></p>
+        <p>ก๊อปโค้ดด้านล่างนี้ลงโปรแกรม Arduino IDE ไป</p>
+        <p><script src="https://gist.github.com/maxpromer/66a96171a38aef461a9afcdd58351cc5.js"></script></p>
+        <p>แก้ไขตรงตัวแปร ssid (บรรทัดที่ 7) ให้เป็นชื่อ AP (ชื่อ WiFi) และแก้ไขตัวแปร password (บรรทัดที่ 8) ให้เป็นรหัสผ่านของ AP (รหัสผ่าน WiFi) กรณีไม่มีรหัสผ่านให้ใส่ตัวเลข 0 ( const char* password = 0; )</p>
+        <p>แก้ค่า mqtt_server (บรรทัดที่ 11) , mqtt_port (บรรทัดที่ 12) ให้ตรงกับหัวข้อ Instance info และกรณีที่สร้าง User Pass ตามผมในขั้นตอนที่แล้วก็ไม่ต้องเปลี่ยนตรง mqtt_user (บรรทัดที่ 13) และ mqtt_password (บรรทัดที่ 14) หากไม่ได้สร้าง User Pass ตาม ให้แก้ตรงส่วนนี้ด้วย</p>
+        <p>ในบรรทัดที่ 16 จะเป็นการกำหนดขาที่ต่อกับ LED แบบ Active Low ซึ่งผมเลือกใช้ขา GPIO5</p>
+        <p><img src="http://a.lnwpic.com/rpi4ye.png" alt="" /></p>
+        <p>เลือกบอร์ด เลือกพอร์ต จากนั้นกด Upload ได้เลย</p>
+        <p><img src="http://a.lnwpic.com/pbiv7t.png" alt="" /></p>
+        <p>เมื่ออัพโหลดเสร็จแล้ว เปิด Serial Moniter ขึ้นมา ปรับ Baud rate เป็น 115200</p>
+        <p><img src="http://a.lnwpic.com/p9i82v.png" alt="" /></p>
+        <p><img src="http://a.lnwpic.com/d056lu.png" alt="" /></p>
+        <p>หากเชื่อมต่อ WiFi สำเร็จ และตั้งค่าถูกต้อง จะขึ้นประมาณดังรูปด้านล่างนี้</p>
+        <p><img src="http://a.lnwpic.com/prom0y.png" alt="" /></p>
+        <p>กลับไปที่หน้า Websocket UI ใส่ Topic เป็น /ESP/LED แล้วใส่ข้อความเป็น GET เมื่อกด Send จะต้องขึ้นดังรูป แสดงว่า ESP8266 สามารถสื่อสารกับ MQTT ได้แล้ว</p>
+        <p><img src="http://a.lnwpic.com/i82y2c.png" alt="" /></p>
+        <p>กลับมาดูที่หน้าต่าง Serial Moniter ก็จะเห็นว่า ESP8266 ได้รับข้อความและส่งความกลับไปพร้อมๆกับได้รับข้อความที่ตัวเองส่งไปด้วย</p>
+        <p><img src="http://a.lnwpic.com/om4bdk.png" alt="" /></p>
+        <h2>การควบคุม LED ผ่านหน้าเว็บ</h2>
+        <p>โหลดไฟล์ทั้งหมดที่ลิ้ง : <a href="https://www.dropbox.com/s/b2rromz9ijg9puh/mqtt_html.zip?dl=0" target="_blank">mqtt_html.zip</a> คลายไฟล์ออกมา ใช้โปรแกรม editor (เช่น Notepad Notepad++) เปิดไฟล์ index.html ขึ้นมาแก้ เลื่อนหา ver config แก้ข้อมูลตรงส่วน mqtt_server และ mqtt_websockets_port ให้ถูกต้อง (ดูรูปด้านล่างประกอบ) หากตอนสร้าง User Pass สร้างไว้ชือรหัสเดียวกับผมก็ไม่ต้องแก้ไข</p>
+        <p><img src="http://a.lnwpic.com/udxltp.png" alt="" /></p>
+        <p>เปิดไฟล์ index.html ด้วย Google Chrome (หรือโปรแกรมท่องเว็บอื่นๆ)</p>
+        <p><img src="http://a.lnwpic.com/nvrve0.png" alt="" /></p>
+        <p>รอซักครู่ หากตั้งค่าไว้ถูกต้องจะขึ้น Connected ลองกดที่ปุ่ม ON หรือ OFF ก็จะสามารถควบคุม LED ได้แล้ว</p>
+        <p><img src="http://a.lnwpic.com/041itj.png" alt="" /></p>
+        <h2>ส่งท้าย</h2>
+        <p>ในบทความนี้ต้องใช้ความรู้ทั้งภาษา C Arduino และภาษาบนเว็บไปด้วยกัน หากมีความรู้ด้านภาษาเว็บอยู่บ้างแล้ว ก็จะทำให้การนำไปประยุกค์ใช้นั้นทำได้ง่ายมากยิ่งขึ้นครับ และหากมีความรู้เขียนโปรแกรม C Arduino อยู่บ้างแล้ว ลองไล่โค้ดแต่ละบรรทัดดู จะช่วยให้เข้าใจการนำฟังก์ชั่นแต่ละตัวไปใช้งานได้ครับ</p>
+        <p><i>บทความโดย : <a href="http://www.ioxhop.com/" target="_blank">ร้าน IOXhop</a></i></p>
+      </article>
+      
+    </div>
+    <div class="col-sm-3">
+      <div class="page-header">
+        <h3>หมวดหมู่</h3>
+      </div>
+      <div class="list-group">
+        <a href="category-news.html" class="list-group-item">ข่าวสารใหม่ๆ</a>
+        <a href="category-hardware.html" class="list-group-item">ข้อมูลฮาร์แวร์</a>
+        <a href="category-arduino.html" class="list-group-item active">Arduino IDE</a>
+        <a href="category-nodemcu-firmware.html" class="list-group-item">NodeMCU Firmware</a>
+        <a href="category-micropython-firmware.html" class="list-group-item">MicroPython Firmware</a>
+        <a href="category-espruino-firmware.html" class="list-group-item">Espruino Firmware</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+<footer class="container">
+  &copy; 2016 ESPIOX2 Document By <a href="http://www.ioxhop.com/" target="_blank">IOXhop</a>. All rights reserved.
+</footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>แนะนำบอร์ด ESPIOX2 - ESPIOX2 Document</title>
+<meta name=viewport content="width=device-width,initial-scale=1" />
+<meta name="description" content="จะหาบอร์ดพัฒนา ESP8266 ที่เล็กขนาดนี้ได้ที่ไหนอีก ? ESPIOX2 บอร์ดพัฒนา ESP8266 12F ที่เล็กที่สุด เสียบคอมพิวเตอร์แล้วอัพโหลดเฟิร์มแวร์ได้เลย" />
+<meta name="keywords" content="espiox2, esp8266, esp8266 development, esp8266 board" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/jquery-1.12.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body>
+<div class="br-top"></div>
+
+<div class="block-top">
+  <section class="container top-h">
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="logo">ESPIOX2 Document</div>
+      </div>
+      <div class="col-sm-5" style="padding-top: 15px;">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="ป้อนคำที่ต้องการ">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">ค้นหา</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="box-breadcrumb">
+  <section class="container">
+    <ol class="breadcrumb">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="category-hardware.html">ข้อมูลฮาร์แวร์</a></li>
+      <li class="active">แนะนำบอร์ด ESPIOX2</li>
+    </ol>
+  </section>
+</div>
+
+<section class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="page-header">
+        <h1>แนะนำบอร์ด ESPIOX2</h1>
+      </div>
+      
+      <div class="article-detail">แก้ไขล่าสุดเมื่อ : 22/5/2559</div>
+      
+      <article>
+        <p>ESP8266 เป็นโมดูล WiFi ขนาดจิ๋ว ราคาถูก ที่ผลิตโดยบริษัท Espressif จากเดิมที่โมดูล WiFi มีราคาสูงถึง 500 - 1,000 บาท แต่ ESP8266 เปิดตัวมาด้วยราคาเพียง $5 หรือร้อยกว่าเท่านั้น ! เมื่อเวลาผ่านไป ESP8266 ได้รับความนิยมเพิ่มขึ้นมากมายจนผลิตไม่ทัน ทาง Espressif ได้เปิดให้ผู้ใช้ทั่วไปสามารถอัพโหลดเฟิร์มแวร์เองได้โดยใช้ SDK ที่ได้เตรียมไว้ให้ ต่อมาทาง Community ได้มีการพัฒนาไลบารี่สำหรับ Arduino IDE ทำให่ตอนนี้เราสามารถใช้โปรแกรม Arduino IDE พัฒนาเฟิร์มแวร์ได้แล้ว รวมถึงไลบารี่เดิมที่ใช้กับ Arduino ก็นำมาใช้งานกับ ESP8266 ได้ด้วย</p>
+        <h2>บอร์ด ESPIOX2</h2>
+        <p>ในการอัพโหลดเฟิร์มแวร์ของ ESP8266 แต่เดิมนั้นต้องใช้โมดูล USB to UART มาต่อเข้ากับขา Tx0 Rx0 ของตัวโมดูล ESP8266 แล้วก็ต้องช๊อตขา GPIO0 ลงกราว์ เพื่อเข้าโหมดอัพโหลดเฟิร์มแวร์ ต่อมาจึงได้มีการพัฒนาบอร์ดสำเร็จรูปที่รวม ESP8266 เข้ากับโมดูล USB to UART ทำให้ไม่ต้องต่อวงจรให้นุ่งยาก เสียบสาย USB แล้วสามารถอัพโหลดโปรแกรมได้เลย</p>
+        <p>บอร์ด ESPIOX2 ก็เป็นหนึ่งในนั้น ตัวบอร์ด ESPIOX2 ออกแบบมาด้วยแนวคิดที่ว่า "เล็กที่สุด" เพื่อเพิ่มพื้นที่ใช้งาน เก็บสะดวก ส่งเสริมการเรียนรู้ และพัฒนาการใช้งานโมดูล ESP8266 เพื่อนำไปทำเป็นสินค้าจัดจำหน่ายได้ต่อไป</p>
+        <p>ESPIOX2 ผลิตโดยคนไทยเอง โดยผู้ผลิตคือ <a href="http://www.ioxhop.com/" target="_blank">ร้าน IOXhop</a> และ <a href="https://www.facebook.com/lamloeicom" target="_blank">
+Lam Loei</a> เป็นผู้ออกแบบ PCB ให้ (ต้องขอบคุณมา ณ ที่นี้)</p>
+        <h2>รูปบอร์ด ESPIOX2 ตัวจริง</h2>
+        <p><img src="http://a.lnwpic.com/cjx7j8.jpg" alt=""></p>
+		<p><img src="http://a.lnwpic.com/aew5h2.jpg" alt=""></p>
+		<p><img src="http://a.lnwpic.com/qln79c.jpg" alt=""></p>
+		<p><img src="http://a.lnwpic.com/v0jnjy.jpg" alt=""></p>
+		<p><img src="http://a.lnwpic.com/4jp1bo.jpg" alt=""></p>
+        <h2>ESPIOX2 Pinout</h2>
+        <p><img src="http://a.lnwpic.com/d6o2nw.png" alt="ESPIOX2 Pinout"></p>
+		<p><a href="http://a.lnwpic.com/0257nf.png" target="_blank">ภาพขนาดเต็ม 3000px * 1500px</a></p>
+		<h2>หลักการเลือกอุปกรณ์อิเล็กทรอนิกส์มาใช้</h2>
+		<p>บอร์ด ESPIOX2 เลือกใช้อุปกรณ์ตัวต้านทานแบบ SMD ขนาด 402 และเลือกใช้ตัวเก็บประจุแบบ SMD ขนาด 602 ทั้งบอร์ด ส่วนชิป USB to UART เลือกใช้ชิปเบอร์ CP2102 ยอดนิยม เมื่อเสียบเข้ากับคอมพิวเตอร์ Windows 8 8.1 10 จะสามารถใช้งานได้เลย ไม่ต้องลงไดร์เวอร์เพิ่มเติม</p>
+		<p>ไอซีเรกกูเลเตอร์เลือกใช้เบอร์  XC6206P332MR ตัวถัง SOT-23 มีขนาดเล็ก รักษาระดับแรงดันคงที่ 3.3V และสามารถทำงานได้มีประสิทธิ์สภาพสูงสุดที่กระแสไม่เกิน 300mA ส่วนคู่ทรานซิสเตอร์เข้าโหมดโปรแกรม / โหมดใช้งาน เลือกใช้งานเบอร์ MBT3904 ที่มีขนาดเล็กที่สุด ภายในมีทรานซิสเตอร์ชนิด NPN จำนวน 2 ตัว ทนแรงดันสูงสุด 60V ทนกระแสสูงสุด 300mA เลือกใช้พอร์ต MicroUSB ในการเชื่อมต่อกับคอมพิวเตอร์ ซึ่งเป็นพอร์ตยอดนิยมที่สุดในขณะนี้ สาย MicroUSB สามารถหาซื้อได้ทั่วไป มีราคาถูกตั้งแต่ 20 บาทไปจนถึงหลายร้อยบาท</p>
+		<h2>การใช้งานบอร์ด ESPIOX2</h2>
+        <p>ท่านสามารถอ่านวิธีการใช้งานได้ในหัวข้อต่างๆของบทความใน <a href="./">หน้าแรก</a></p>
+		<h2>การสั่งซื้อและชำระเงิน</h2>
+		<p>ท่านสามารถสั่งซื้อผ่านระบบออนไลน์ได้ที่ <a href="http://www.ioxhop.com/" target="_blank">EPSIOX2 ESP8266 Development Board</a> หรือร้านตัวแทนจำหน่ายอื่นๆ ในราคาเพียง 260 บาท รับประกัน 7 วัน เปลี่ยนตัวใหม่ให้เลย (สินค้าจ้องอยู่ในสภาพสมบูรณ์ ไม่มีรอยแตก หัก ไหม้ และเปียกน้ำ) กรณีเกิน 7 วันสามารถส่งกลับมาซ่อมได้</p>
+      </article>
+      
+    </div>
+    <div class="col-sm-3">
+      <div class="page-header">
+        <h3>หมวดหมู่</h3>
+      </div>
+      <div class="list-group">
+        <a href="category-news.html" class="list-group-item">ข่าวสารใหม่ๆ</a>
+        <a href="category-hardware.html" class="list-group-item active">ข้อมูลฮาร์แวร์</a>
+        <a href="category-arduino.html" class="list-group-item">Arduino IDE</a>
+        <a href="category-nodemcu-firmware.html" class="list-group-item">NodeMCU Firmware</a>
+        <a href="category-micropython-firmware.html" class="list-group-item">MicroPython Firmware</a>
+        <a href="category-espruino-firmware.html" class="list-group-item">Espruino Firmware</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+<footer class="container">
+  &copy; 2016 ESPIOX2 Document By <a href="http://www.ioxhop.com/" target="_blank">IOXhop</a>. All rights reserved.
+</footer>
+</body>
+</html>

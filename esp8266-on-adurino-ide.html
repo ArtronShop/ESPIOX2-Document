@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>เริ่มต้นพัฒนาเฟิร์มแวร์ EPS8266 ด้วย Arduino IDE - ESPIOX2 Document</title>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/jquery-1.12.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body>
+<div class="br-top"></div>
+
+<div class="block-top">
+  <section class="container top-h">
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="logo">ESPIOX2 Document</div>
+      </div>
+      <div class="col-sm-5" style="padding-top: 15px;">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="ป้อนคำที่ต้องการ">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">ค้นหา</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="box-breadcrumb">
+  <section class="container">
+    <ol class="breadcrumb">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="category-arduino.html">Arduino IDE</a></li>
+      <li class="active">เริ่มต้นพัฒนาเฟิร์มแวร์ EPS8266 ด้วย Arduino IDE</li>
+    </ol>
+  </section>
+</div>
+
+<section class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="page-header">
+        <h1>เริ่มต้นพัฒนาเฟิร์มแวร์ EPS8266 ด้วย Arduino IDE</h1>
+      </div>
+      
+      <div class="article-detail">แก้ไขล่าสุดเมื่อ : 28/4/2559</div>
+      
+      <article>
+        <p>โมดูล ESP8266 เป็นโมดูล WiFi ที่มีไมโครคอนโทรลเลอร์อยู่ในตัวเอง ซึ่งเดิมทีแล้วเมื่อซื้อโมดูลมาจากร้านค้าต่างๆ ก็จะได้เฟิร์มแวร์ AT Command มาเป็นค่าดีฟอล สามารถนำไปต่อกับไมโครคอนโทรลเลอร์ต่างๆ เช่น Arduino เพื่อสั่งงานได้ แต่เมื่อมีคนออกเฟรมเวิร์คมาสำหรับ Arduino IDE แล้ว ความนิยมในการใช้งาน Arduino IDE ในการเขียนเฟิร์มแวร์เองก็เพิ่มสูงมากขึ้น เนื่องจากสามารถเขียนโปรแกรมให้ ESP8266 สามารถทำงานได้โดยตรง ไม่ต้องใช้ไมโครคอนโทรลเลอร์อีกต่อไปแล้ว อีกทั้ง ESP8266 มีไมโครคอนโทรลเลอร์ภายในที่มีประสิทธิ์ภาพสูง ทำงานที่สัญญาณนาฬิกา 40MHz การเชื่อมต่อ AP ต่างๆก็สามารถทำได้ง่ายกว่ามาก ไลบารี่เดิมที่ใช้กับบอร์ด Arduino ส่วนใหญ่ก็สามารถนำมาใช้งานกับ ESP8266 ที่พัฒนาบน Arduino IDE ได้ด้วย เช่น ไลบารี่ DHT11 DHT22 ยอดนิยม ใช้อ่านค่าอุณหภูมิส่งขึ้นอินเตอร์เน็ต</p>
+        <h2>การติดตั้งบอร์ดเพิ่มในโปรแกรม Arduino IDE</h2>
+        <p>หากยังได้ติดตั้งโปรแกรม Arduino IDE ท่านสามารถดาว์โหลดตัวติดตั้งได้ที่ : <a href="https://www.arduino.cc/en/Main/Software" target="_blank">https://www.arduino.cc/en/Main/Software</a> เมื่อติดตั้งเสร็จเรียบร้อยแล้ว เปิดโปรแกรมขึ้นมา กดไปที่เมนู File &gt; Preferences</p>
+        <p><img src="http://a.lnwpic.com/npz12j.png" alt=""></p>
+        <p>นำลิ้ง <code>http://arduino.esp8266.com/stable/package_esp8266com_index.json</code> ไปวางลงในช่อง Additional Boards Manager URLs จากนั้นกดปุ่ม OK</p>
+        <p><img src="http://a.lnwpic.com/oq5zrd.png" alt=""></p>
+        <p>กดไปที่เมนู Tool &gt; Board &gt;Boards Manager... </p>
+        <p><img src="http://a.lnwpic.com/7r3825.png" alt=""></p>
+        <p>เลื่อนหา esp8266 กดเลือก แล้วกดปุ่ม Install</p>
+        <p><img src="http://a.lnwpic.com/ykug84.png" alt=""></p>
+        <p>รอโปรแกรมดาว์โหลดไฟล์ และติดตั้งซักครู่</p>
+        <p><img src="http://a.lnwpic.com/asx81m.png" alt=""></p>
+        <p>เมื่อติดตั้งเสร็จแล้ว จะมีคำว่า INSTALLED ปรากฏดังรูป จากนั้นกดปุ่ม Close เพื่อปิดหน้าต่างไป</p>
+        <p><img src="http://a.lnwpic.com/sfuwe9.png" alt=""></p>
+        <h2>ทดสอบคอมไพล์ และอัพโหลดเฟิร์มแวร์</h2>
+        <p>ก๊อปโค้ดด้านล่างนี้ลงโปรแกรม Arduino IDE จากนั้นเซฟไฟล์</p>
+        <p><script src="https://gist.github.com/maxpromer/00a91ef51b4bb295b41365474abb40b7.js"></script></p>
+        <p><img src="http://a.lnwpic.com/xao222.png" alt=""></p>
+        <p>เลือกบอร์ดโดยคลิกที่ Tool &gt; Board &gt; NodeMCU 1.0</p>
+        <p><img src="http://a.lnwpic.com/ijd9m7.png" alt=""></p>
+        <p>เลือก COM Port ที่ถูกต้อง (โดยปกติจะมีอันเดียว กรณีมี 2 อัน ให้เลือกอันที่ไม่ใช่ COM0)</p>
+        <p><img src="http://a.lnwpic.com/oqzcoh.png" alt=""></p>
+        <p>กดปุ่ม Upload</p>
+        <p><img src="http://a.lnwpic.com/1t909c.png" alt=""></p>
+        <p>รออัพโหลดโค้ดซักครู่</p>
+        <p><img src="http://a.lnwpic.com/gg4h36.png" alt=""></p>
+        <p>เมื่อเสร็จแล้วจะขึ้นคำว่า Done uploading. แล้วสังเกตุ LED บนโมดูล ESP8266 12F จะกระพริบทุกๆ 0.5 วินาที</p>
+        <p><img src="http://a.lnwpic.com/72yke9.png" alt=""></p>
+        <h2>การประยุกต์ใช้งาน</h2>
+        <p>ในโปรแกรม Arduino เองมีไลบารี่ต่างๆให้ลองเล่นอีกมากมาย เช่น ไลบารี่ MQTT ใช้สำหรับรับ-ส่งข้อมูลเรียวทามผ่านอินเตอร์เน็ต หรือแอพ Blink เป็นแอพสำเร็จรูปที่ทำให้การส่งข้อมูลจากสมาร์ทโฟนสามารถทำได้ง่ายขึ้นอย่างมาก ท่านสามารถติดตามบทความการใช้งาน ESP8266 กับ Arduino IDE ได้ในหมวดหมู่นี้ครับ</p>
+      </article>
+      
+    </div>
+    <div class="col-sm-3">
+      <div class="page-header">
+        <h3>หมวดหมู่</h3>
+      </div>
+      <div class="list-group">
+        <a href="category-news.html" class="list-group-item">ข่าวสารใหม่ๆ</a>
+        <a href="category-hardware.html" class="list-group-item">ข้อมูลฮาร์แวร์</a>
+        <a href="category-arduino.html" class="list-group-item active">Arduino IDE</a>
+        <a href="category-nodemcu-firmware.html" class="list-group-item">NodeMCU Firmware</a>
+        <a href="category-micropython-firmware.html" class="list-group-item">MicroPython Firmware</a>
+        <a href="category-espruino-firmware.html" class="list-group-item">Espruino Firmware</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+<footer class="container">
+  &copy; 2016 ESPIOX2 Document By <a href="http://www.ioxhop.com/" target="_blank">IOXhop</a>. All rights reserved.
+</footer>
+</body>
+</html>
