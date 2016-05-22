@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>การใช้ ESP8266 ทำเว็บเซิฟเวอร์แบบง่ายๆ - ESPIOX2 Document</title>
+<meta name=viewport content="width=device-width,initial-scale=1" />
+<meta name="description" content="สอนการนำ ESP8266 มาทำเว็บเซิฟเวอร์แบบง่ายๆ อธิบายโค้ดทุกบรรทัด เข้าใจง่ายแน่นอน" />
+<meta name="keywords" content="espiox2,nodemcu,esp8266,wemos,arduino,esp8266 webserver" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/jquery-1.12.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body>
+<div class="br-top"></div>
+
+<div class="block-top">
+  <section class="container top-h">
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="logo">ESPIOX2 Document</div>
+      </div>
+      <div class="col-sm-5" style="padding-top: 15px;">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="ป้อนคำที่ต้องการ">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">ค้นหา</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="box-breadcrumb">
+  <section class="container">
+    <ol class="breadcrumb">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="category-arduino.html">Arduino IDE</a></li>
+      <li class="active">การใช้ ESP8266 ทำเว็บเซิฟเวอร์แบบง่ายๆ</li>
+    </ol>
+  </section>
+</div>
+
+<section class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="page-header">
+        <h1>การใช้ ESP8266 ทำเว็บเซิฟเวอร์แบบง่ายๆ</h1>
+      </div>
+      
+      <div class="article-detail">แก้ไขล่าสุดเมื่อ : 22/5/2559</div>
+      
+      <article>
+        <p>ESP8266 ที่ใช้กับ Arduino IDE จะสามารถนำมาทำเป็น WebServer ได้ง่ายกว่าภาษาอื่นๆ เนื่องจากโค้ดนั้นมีความง่ายมากกว่า และมีความยืดหยุ่นอย่างมาก ในบทความนี้เราจะมาลองทำ Basic WebServer ด้วย ESP8266 กันครับ</p>
+        <h2>อัพโหลดโค้ดด้วยโปรแกรม Arduino IDE</h2>
+        <p>หากยังไม่ได้ติดตั้งไลบารี่ของ ESP8266 ไว้ สามารถดูได้ในบทความเก่า <a href="esp8266-on-adurino-ide.html" target="_blank">เริ่มต้นพัฒนาเฟิร์มแวร์ EPS8266 ด้วย Arduino IDE</a></p>
+        <p>นำโค้ดด้าล่างนี้ก๊อบไปไว้ในหน้าต่าง Editor เซฟ เลือกบอร์ด เลือกพอร์ต แล้วกดอัพโหลดเข้าไปได้เลย</p>
+        <p>รายละเอียดของฟังก์ชั่นมีอธิบายในคอมเม้นแต่ละบรรทัดแล้ว สามารถทำความเข้าได้ง่ายๆครับ</p>
+        <p><script src="https://gist.github.com/maxpromer/336a2551399f1d4eeb74b925bc82dde2.js"></script></p>
+        <p><img src="http://a.lnwpic.com/vdij0l.jpg" alt=""></p>
+        <h2>การทดสอบ</h2>
+        <p>ใช้อุปกรณ์พกพา โทรศัพท์มือถือ หรืออุปกรณ์ที่เชื่อมต่อ WiFi ได้ ค้นหา WiFi ที่ชื่อ ESP_xxx แล้วกดเชื่อมต่อ</p>
+        <p><img src="http://a.lnwpic.com/vexxpp.jpg" alt=""></p>
+        <p>จากนั้นเข้าไปที่ http://192.168.4.1/ จะเห็นคำว่า Hello, world ! แล้วครับ</p>
+        <p><img src="http://a.lnwpic.com/cbiyu2.jpg" alt=""></p>
+      </article>
+      
+    </div>
+    <div class="col-sm-3">
+      <div class="page-header">
+        <h3>หมวดหมู่</h3>
+      </div>
+      <div class="list-group">
+        <a href="category-news.html" class="list-group-item">ข่าวสารใหม่ๆ</a>
+        <a href="category-hardware.html" class="list-group-item">ข้อมูลฮาร์แวร์</a>
+        <a href="category-arduino.html" class="list-group-item active">Arduino IDE</a>
+        <a href="category-nodemcu-firmware.html" class="list-group-item">NodeMCU Firmware</a>
+        <a href="category-micropython-firmware.html" class="list-group-item">MicroPython Firmware</a>
+        <a href="category-espruino-firmware.html" class="list-group-item">Espruino Firmware</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+<footer class="container">
+  &copy; 2016 ESPIOX2 Document By <a href="http://www.ioxhop.com/" target="_blank">IOXhop</a>. All rights reserved.
+</footer>
+</body>
+</html>

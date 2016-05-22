@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>การเข้าสู่โหมดอัพเดทเฟิร์มแวร์แบบแมนนวล - ESPIOX2 Document</title>
+<meta name=viewport content="width=device-width,initial-scale=1" />
+<meta name="description" content="การเข้าสู่โหมดอัพเดทเฟิร์มแวร์แบบแมนนวลของบอร์ด ESPIOX2 ใช้กรณีที่บอร์ดไม่สามารถเข้าโหมดอัพโหลดโปรแกรมได้เอง เช่น อุปกรณ์บนบอร์ดไม่สามารถใชังานได้" />
+<meta name="keywords" content="espiox2, espiox2 flash mode, espiox2 reset, esp8266 flash mode" />
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/jquery-1.12.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+<body>
+<div class="br-top"></div>
+
+<div class="block-top">
+  <section class="container top-h">
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="logo">ESPIOX2 Document</div>
+      </div>
+      <div class="col-sm-5" style="padding-top: 15px;">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="ป้อนคำที่ต้องการ">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">ค้นหา</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="box-breadcrumb">
+  <section class="container">
+    <ol class="breadcrumb">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="category-hardware.html">ข้อมูลฮาร์แวร์</a></li>
+      <li class="active">การเข้าสู่โหมดอัพเดทเฟิร์มแวร์แบบแมนนวล</li>
+    </ol>
+  </section>
+</div>
+
+<section class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="page-header">
+        <h1>การเข้าสู่โหมดอัพเดทเฟิร์มแวร์แบบแมนนวล</h1>
+      </div>
+      
+      <div class="article-detail">แก้ไขล่าสุดเมื่อ : 22/5/2559</div>
+      
+      <article>
+        <p><strong>การเข้าสู่โหมดอัพเดทเฟิร์มแวร์แบบแมนนวล</strong> คือ การบังคับให้ ESP8266 เข้าสู่โหมดอัพโหลดโปรแกรมด้วยมือ ใช้กรณีที่บอร์ด ESPIOX2 ไม่สามารถอัพโหลดเฟิร์มแวร์ได้ โดยอาจจะเกิดจากอุปกรณ์บนบอร์ดมีปัญหา หรือเกิดจากโปรแกรมที่ใช้อัพโหลดเฟิร์มแวร์ไม่รองรับการเข้าโหมดอัพโหลดแบบอัตโนมัติ</p>
+        <h2>การต่อวงจร</h2>
+        <p>การเข้าโหมดอัพเดทเฟิร์มแวร์จะต้องทำให้ GPIO0 มีลอจิกเป็น 0 ในขณะที่ขา RESET กลับมาเป็นลอจิก 1 แล้ว และการเข้าโหมดรันโปรแกรมแบบปกติ ต้องทำให้ GPIO0 มีลอจิก 1 ใน๘ณะที่ขา RESET กลับมาเป็นลอจิก 1</p>
+		<p>ในบอร์ด ESPIOX2 ต่อตัวต้านทานพลูอัพไว้ให้แล้ว เหลือเพียงต่อสวิตซ์กดติดปล่อยดับเพิ่มเติมเท่านั้น ซึ่งสามารถต่อได้ตามรูปด้านล่าง</p>
+        <p><img src="http://a.lnwpic.com/53aeev.jpg" alt=""></p>
+		<p><img src="http://a.lnwpic.com/iqzlhf.jpg" alt=""></p>
+		<p>สาเหตุที่ต้องต่อสวิตซ์ไว้ที่ขา 1 (สวิตซ์รีเซ็ต) และขา 12 (สวิตซ์โหมดแฟรส) เนื่องจากขา 1 เป็นขา RESET และขา 12 เป็นขา FLASH ตาม Pinout นั่นเอง</p>
+		<img src="http://a.lnwpic.com/d6o2nw.png" alt="ESPIOX2 Pinout">
+        <h2>การเข้าสู่โหมดอัพเดทเฟิร์มแวร์</h2>
+		<p>ให้ทำตามขั้นตอนดังต่อไปนี้</p>
+		<ul>
+		  <li>กดสวิตซ์ GPIO0 ค้างไว้  (สวิตซ์ด้านขวา)</li>
+		  <li>กดสวิตซ์ RESET</li>
+		  <li>ปล่อยสวิตซ์ RESET</li>
+		  <li>ปล่อยสวิตซ์ GPIO0</li>
+		</ul>
+		<p>หากต้องการกลับมาโหมดทำงานตามปกติ กดสวิตซ์ RESET แล้วปล่อยได้เลย</p>
+      </article>
+      
+    </div>
+    <div class="col-sm-3">
+      <div class="page-header">
+        <h3>หมวดหมู่</h3>
+      </div>
+      <div class="list-group">
+        <a href="category-news.html" class="list-group-item">ข่าวสารใหม่ๆ</a>
+        <a href="category-hardware.html" class="list-group-item active">ข้อมูลฮาร์แวร์</a>
+        <a href="category-arduino.html" class="list-group-item">Arduino IDE</a>
+        <a href="category-nodemcu-firmware.html" class="list-group-item">NodeMCU Firmware</a>
+        <a href="category-micropython-firmware.html" class="list-group-item">MicroPython Firmware</a>
+        <a href="category-espruino-firmware.html" class="list-group-item">Espruino Firmware</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+<footer class="container">
+  &copy; 2016 ESPIOX2 Document By <a href="http://www.ioxhop.com/" target="_blank">IOXhop</a>. All rights reserved.
+</footer>
+</body>
+</html>
