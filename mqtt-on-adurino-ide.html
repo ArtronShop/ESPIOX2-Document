@@ -100,6 +100,7 @@
         <p><img src="http://a.lnwpic.com/xgp0q4.png" alt="" /></p>
         <h2>เขียนโค้ดด้วย Arduino IDE</h2>
         <p>หากยังไม่ได้ลงบอร์ดให้โปรแกรม Arduino ท่านสามารถอ่านวิธีลงบอร์ดได้ที่บทความ <a href="esp8266-on-adurino-ide.html" target="_blank">เริ่มต้นพัฒนาเฟิร์มแวร์ด้วย Arduino IDE</a></p>
+		<p>ใน Arduino จะไม่มีไลบารี่เชื่อมต่อ MQTT มาให้ในตัว สามารถดาว์โหลดมาติดตั้งจากลิ้ง <a href="https://github.com/knolleary/pubsubclient/releases" target="_blank">Arduino Client for MQTT</a></p>
         <p>ก๊อปโค้ดด้านล่างนี้ลงโปรแกรม Arduino IDE ไป</p>
         <p><script src="https://gist.github.com/maxpromer/66a96171a38aef461a9afcdd58351cc5.js"></script></p>
         <p>แก้ไขตรงตัวแปร ssid (บรรทัดที่ 7) ให้เป็นชื่อ AP (ชื่อ WiFi) และแก้ไขตัวแปร password (บรรทัดที่ 8) ให้เป็นรหัสผ่านของ AP (รหัสผ่าน WiFi) กรณีไม่มีรหัสผ่านให้ใส่ตัวเลข 0 ( const char* password = 0; )</p>
